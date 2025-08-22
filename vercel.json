@@ -1,0 +1,15 @@
+{
+     "version": 2,
+     "builds": [
+       {
+         "src": "./dist/kiosk/**",
+         "use": "@vercel/static"
+       }
+     ],
+     "routes": [
+       {
+         "src": "/(.*)",
+         "dest": "/dist/kiosk/index.html"
+       }
+     ]
+   }

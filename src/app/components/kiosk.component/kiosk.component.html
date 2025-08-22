@@ -1,0 +1,16 @@
+<div class="kiosk-container">
+  <h2>Kiosk</h2>
+  <button (click)="createSession()">Create Session</button>
+  <div *ngIf="sessionKey" class="session-info">Session Key: {{ sessionKey }}</div>
+  <div *ngIf="counters.length" class="counters-info">Connected Counters: {{ counters.join(', ') }}</div>
+  <div *ngIf="lastMessage" class="message-info">Last Message: {{ lastMessage }}</div>
+  <div class="message-inputs">
+    <input [(ngModel)]="message" placeholder="Message to send" />
+    <input [(ngModel)]="targetCounterId" placeholder="Target Counter ID" />
+    <button (click)="sendMessage()">Send to {{ targetCounterId }}</button>
+  </div>
+  <div class="debug-logs">
+    <h3>Debug Logs</h3>
+    <pre>{{ debugLogs.join('\n') }}</pre>
+  </div>
+</div>
