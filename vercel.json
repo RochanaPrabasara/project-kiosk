@@ -3,7 +3,7 @@
      "builds": [
        {
          "src": "./dist/frontend-kiosk/**",
-         "use": "@vercel/static"
+         "use": "@vercel/node"
        }
      ],
      "routes": [
