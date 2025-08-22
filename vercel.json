@@ -2,14 +2,14 @@
      "version": 2,
      "builds": [
        {
-         "src": "./dist/kiosk/**",
+         "src": "./dist/frontend-kiosk/**",
          "use": "@vercel/static"
        }
      ],
      "routes": [
        {
          "src": "/(.*)",
-         "dest": "/dist/kiosk/index.html"
+         "dest": "/dist/frontend-kiosk/index.html"
        }
      ]
    }
