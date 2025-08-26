@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build --configuration=production
 
 # Stage 2: Serve with Node.js for SSR
-FROM node:18.20.4-alpine
+FROM node:latest
 WORKDIR /app
 COPY --from=build /app/dist/frontend-kiosk /app/dist/frontend-kiosk
 COPY package*.json ./
