@@ -2,13 +2,17 @@
 FROM node:latest AS build
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm install --network-timeout=100000 --retry=5
 COPY . .
 RUN npm run build --configuration=production
 
-# Stage 2: Serve with nginx
-FROM nginx:alpine
-COPY --from=build /app/dist/frontend-kiosk/browser /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Stage 2: Serve with Node.js for SSR
+FROM node:18.20.4-alpine
+WORKDIR /app
+COPY --from=build /app/dist/frontend-kiosk /app/dist/frontend-kiosk
+COPY package*.json ./
+RUN npm install --production
+COPY . .
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+ENV PORT=80
+CMD ["node", "dist/frontend-kiosk/server/server.mjs"]
